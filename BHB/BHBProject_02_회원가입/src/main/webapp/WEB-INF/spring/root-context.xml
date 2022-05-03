@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+		<!--1. properties등록  -->
+<context:property-placeholder location="classpath:com/config/bhb.properties"/>
+<!--  2. DataSource생성-->
+<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+	<property name="driverClassName" value="${oracle.jdbc}"></property>
+	<property name="url" value="${oracle.url}"></property>
+	<property name="username" value="${oracle.userid}"></property>
+	<property name="password" value="${oracle.passwd}"></property>
+</bean>
+
+
+<!-- tx -->
+
+<!-- 3. SqlSessonFactoryBean생성, mapper지정, alias지정  -->
+<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
+	<property name="dataSource" ref="dataSource"></property>
+	<property name="mapperLocations">
+		<list>
+			<value>classpath:com/config/BookMarkMapper.xml</value>
+			<value>classpath:com/config/GoodsMPMapper.xml</value>
+			<value>classpath:com/config/GoodsYPMapper.xml</value>
+			<value>classpath:com/config/LessorMapper.xml</value>
+			<value>classpath:com/config/MemberMapper.xml</value>
+		</list>
+	</property>
+	 <!--  <property name="mapperLocations" value="classpath:com/dao/*.xml" /> -->
+  <!-- <property name="typeAliasesPackage" value="com.test" /> -->
+	<property name="typeAliases">
+		<list>
+			<value>com.dto.BookMarkDTO</value><!-- dto클래스에서 alias명 지정 @Alias('alias명')  -->
+			<value>com.dto.Goods_MP_DTO</value><!-- dto클래스에서 alias명 지정 @Alias('alias명')  -->
+			<value>com.dto.Goods_YP_DTO</value><!-- dto클래스에서 alias명 지정 @Alias('alias명')  -->			
+			<value>com.dto.LessorDTO</value><!-- dto클래스에서 alias명 지정 @Alias('alias명')  -->
+			<value>com.dto.MemberDTO</value><!-- dto클래스에서 alias명 지정 @Alias('alias명')  -->
+			
+		</list>
+	</property>
+</bean>
+
+<!-- 4.마지막 SqlSessinTemplate 생성, SqlSession과 동일한 기능 -->
+<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+<constructor-arg name="sqlSessionFactory" ref="sessionFactory"></constructor-arg>
+</bean>
+
+
+</beans>
