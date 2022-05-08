@@ -59,7 +59,7 @@ CREATE TABLE "MEMBER"
 
 
 CREATE TABLE "BHB"."LESSOR"   --임대인
-   (    "NAME" VARCHAR2(10 BYTE),  --이름
+   (    "NICKNAME" VARCHAR2(30 BYTE),  --이름
     "USERID" VARCHAR2(10 BYTE) NOT NULL ENABLE, --아이디 
     "PASSWD" VARCHAR2(10 BYTE) NOT NULL ENABLE, --패스워드
     "POST" VARCHAR2(6 BYTE) NOT NULL ENABLE, --우편번호
@@ -70,6 +70,8 @@ CREATE TABLE "BHB"."LESSOR"   --임대인
     "PHONE3" VARCHAR2(4 BYTE) NOT NULL ENABLE,  -- 전화번호 
     "EMAIL1" VARCHAR2(20 BYTE) NOT NULL ENABLE, --이메일
     "EMAIL2" VARCHAR2(20 BYTE) NOT NULL ENABLE, --이메일 
-    FOREIGN KEY ("USERID") REFERENCES MEMBER(USERID));
+    PRIMARY KEY ("USERID"));
 
-
+alter table lessor add primary key (userid);
+alter table GOODS_MP ADD CONSTRAINT fk_GOODS_MP foreign KEY(lessorid) references LESSOR(userid);
+alter table GOODS_YP ADD CONSTRAINT fk_GOODS_YP foreign KEY(lessorid) references LESSOR(userid);
