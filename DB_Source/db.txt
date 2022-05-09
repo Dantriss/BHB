@@ -73,3 +73,8 @@ CREATE TABLE "BHB"."LESSOR"   --임대인
     FOREIGN KEY ("USERID") REFERENCES MEMBER(USERID));
 
 
+alter table lessor add primary key (userid);
+alter table GOODS_MP ADD CONSTRAINT fk_GOODS_MP foreign KEY(lessorid) references LESSOR(userid);
+alter table GOODS_YP ADD CONSTRAINT fk_GOODS_YP foreign KEY(lessorid) references LESSOR(userid);
+
+
