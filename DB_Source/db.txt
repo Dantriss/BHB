@@ -11,7 +11,11 @@ CREATE table GOODS_MP (
   ELV VARCHAR(10) NOT NULL, -- 엘베유무
   PARKING VARCHAR(10) NOT NULL, -- 주차유무
   BUILD NUMBER(10) NOT NULL, -- 준공날짜
-  GIMAGE VARCHAR (20) NOT NULL); --사진
+  GIMAGE1 VARCHAR (20) NOT NULL, 
+  GIMAGE2 VARCHAR (20) NOT NULL, 
+  GIMAGE3 VARCHAR (20) NOT NULL, 
+  GIMAGE4 VARCHAR (20) NOT NULL, 
+  GIMAGE5 VARCHAR (20) NOT NULL, ); --사진
 
 CREATE table GOODS_YP (
   GCODE NUMBER(10) PRIMARY KEY, --코드
@@ -25,7 +29,11 @@ CREATE table GOODS_YP (
   ELV VARCHAR(10) NOT NULL, -- 엘베유무
   PARKING VARCHAR(10) NOT NULL, -- 주차유무
   BUILD NUMBER(10) NOT NULL, -- 준공날짜
-  GIMAGE VARCHAR (20) NOT NULL); --사진
+  GIMAGE1 VARCHAR (20) NOT NULL, 
+  GIMAGE2 VARCHAR (20) NOT NULL, 
+  GIMAGE3 VARCHAR (20) NOT NULL, 
+  GIMAGE4 VARCHAR (20) NOT NULL, 
+  GIMAGE5 VARCHAR (20) NOT NULL, ); --사진
 
 
 CREATE TABLE "BHB"."BOOKMARK" 
@@ -75,3 +83,18 @@ CREATE TABLE "BHB"."LESSOR"   --임대인
 alter table lessor add primary key (userid);
 alter table GOODS_MP ADD CONSTRAINT fk_GOODS_MP foreign KEY(lessorid) references LESSOR(userid);
 alter table GOODS_YP ADD CONSTRAINT fk_GOODS_YP foreign KEY(lessorid) references LESSOR(userid);
+
+--------------------------------------------------------------------
+
+alter table GOODS_YP rename column GIMAGE to GIMAGE1;
+alter table GOODS_YP add GIMAGE2 VARCHAR2(20);
+alter table GOODS_YP add GIMAGE3 VARCHAR2(20);
+alter table GOODS_YP add GIMAGE4 VARCHAR2(20);
+alter table GOODS_YP add GIMAGE5 VARCHAR2(20);
+
+alter table GOODS_MP rename column GIMAGE to GIMAGE1;
+alter table GOODS_MP add GIMAGE2 VARCHAR2(20);
+alter table GOODS_MP add GIMAGE3 VARCHAR2(20);
+alter table GOODS_MP add GIMAGE4 VARCHAR2(20);
+alter table GOODS_MP add GIMAGE5 VARCHAR2(20);
+
