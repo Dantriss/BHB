@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GoodsYPMapper">
+
+	<select id="goodsList" resultType="Goods_YP_DTO" parameterType="string">
+	select * from goods_yp where room=#{room}
+	</select>
+	<select id="goodsListYP" resultType="Goods_YP_DTO">
+	select * from goods_yp
+	</select>
+	
+	<select id="goodsListYP_Loc" resultType="Goods_YP_DTO" parameterType="string">
+	select * from goods_yp where address like '%'||#{location}||'%'
+	</select>
+	
+	<insert id="goodsYPAdd" parameterType="Goods_YP_DTO">
+	insert into goods_yp(gcode,gprice_yp,address,location,
+	area,room,fee,floor,elv,parking,build,gimage1,lessorid,gimage2,gimage3,gimage4,gimage5)
+	values( #{gCode},#{gPrice_YP},#{address},
+	#{location},#{area},#{room},#{fee},#{floor},#{elv},
+	#{parking},#{build},#{gImage1},#{lessorid},#{gImage2},#{gImage3},#{gImage4},#{gImage5})
+	</insert>
+	
+	<select id="goodsYPCount" resultType="int">
+	select count(*)
+	from goods_yp
+	</select>
+	
+	<select id="goodsRetrieveYP" resultType="Goods_YP_DTO" parameterType="string">
+	select * from goods_yp
+	where gcode=#{gCode}
+	</select>
+	
+</mapper>

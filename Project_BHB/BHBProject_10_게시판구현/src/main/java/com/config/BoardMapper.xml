@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BoardMapper">
+	<select id="noticeList" resultType="Board_NoticeDTO">
+		select *
+		from board_notice
+	</select>
+	
+	<select id="boardNotice" resultType="Board_NoticeDTO" parameterType="int">
+		select *
+		from board_notice
+		where bn_num=#{bn_num}
+	</select>
+	
+	<select id="boardLessorList" resultType="Board_LessorDTO">
+		select *
+		from board_lessor
+	</select>
+	
+	<select id="boardLessor" resultType="Board_LessorDTO" parameterType="int">
+		select *
+		from board_lessor
+		where bl_num=#{bl_num}
+	</select>
+</mapper>
+

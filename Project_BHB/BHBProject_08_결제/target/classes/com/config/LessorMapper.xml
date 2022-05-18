@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="LessorMapper">
+ 
+ 	<!-- lessor 등록 -->
+	<insert id="lessorAdd" parameterType="LessorDTO">
+		insert into lessor (nickname,userid,passwd,post,addr1,addr2,
+		phone1,phone2,phone3,email1,email2)
+		values( #{nickname},#{userid},#{passwd},#{post},#{addr1},#{addr2},
+		#{phone1},#{phone2},#{phone3},#{email1},#{email2})
+	</insert>
+    
+    
+    <!-- 물품등록 페이지(lessorOffer) -->
+	<select id="lessorOffer" parameterType="string"
+		resultType="LessorDTO">
+		select *
+		from lessor
+		where userid = #{userid}
+	</select>
+	
+		<!-- 로그인 -->
+	<select id="login" parameterType="hashmap"
+		resultType="LessorDTO">
+		select nickname,userid,passwd,post,addr1,addr2,
+		phone1,phone2,phone3,email1,email2
+		from lessor
+		where nickname = #{nickname}
+	</select>
+	
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+<mvc:annotation-driven></mvc:annotation-driven>
+<mvc:default-servlet-handler/>
+
+<mvc:view-controller path="/" view-name="main"/> <!-- 요청 main.JSP -->
+<mvc:view-controller path="/memberForm" view-name="memberForm"/> <!-- 요청 memberForm.JSP -->
+<mvc:view-controller path="/loginForm" view-name="loginForm"/> <!-- 요청 loginForm.JSP -->
+<mvc:view-controller path="/myPage" view-name="mypage"/> 
+<mvc:view-controller path="/memberModify" view-name="memberModify"/> 
+<mvc:view-controller path="/lessorRegist" view-name="lessorRegist"/> 
+<mvc:view-controller path="/lessor" view-name="lessor"/> <!-- 공인중개사 인증화면 -->
+<mvc:view-controller path="/lessorOffer_mp" view-name="lessorOffer_mp"/> 
+<mvc:view-controller path="/lessorOffer_yp" view-name="lessorOffer_yp"/> 
+<mvc:view-controller path="/bookMark" view-name="bookMark"/>
+<mvc:view-controller path="/goodsRetrieve" view-name="goodsRetrieve"/> 
+
+<mvc:resources location="/WEB-INF/views/images/" mapping="/images/**"/>
+<mvc:resources location="/WEB-INF/views/css/" mapping="/css/**"/>
+<mvc:resources location="/WEB-INF/views/js/" mapping="/js/**"/>
+
+<!-- el,jstl 태그 디펜던시 추가 없이 사용가능 -->
+<bean id="loginCheckInterceptor" class="com.interceptor.LoginCheckInterceptor"></bean>
+<mvc:interceptors>
+	<mvc:interceptor>
+		<mvc:mapping path="/loginCheck/**"/>
+		<ref bean="loginCheckInterceptor"/>
+	</mvc:interceptor>
+</mvc:interceptors>
+
+
+
+<context:component-scan base-package="com.*"></context:component-scan>
+
+
+<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<property name="prefix" value="/WEB-INF/views/"></property>
+	<property name="suffix" value=".jsp"></property>
+</bean>
+
+
+		
+</beans>
