@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BoardMapper">
+	<select id="noticeList" resultType="Board_NoticeDTO">
+		select *
+		from board_notice
+	</select>
+	
+	<select id="boardNotice" resultType="Board_NoticeDTO" parameterType="int">
+		select *
+		from board_notice
+		where bn_num=#{bn_num}
+	</select>
+	
+	<select id="boardLessorList" resultType="Board_LessorDTO">
+		select *
+		from board_lessor
+	</select>
+	
+	<select id="boardLessor" resultType="Board_LessorDTO" parameterType="int">
+		select *
+		from board_lessor
+		where bl_num=#{bl_num}
+	</select>
+	
+	<insert id="writeAction" parameterType="Board_LessorDTO">
+        insert into board_lessor(bl_num,bl_title,bl_lessorid,bl_nick,bl_date,bl_hit,bl_content)
+        values(#{bl_num},#{bl_title},#{bl_lessorid},#{bl_nick},#{bl_date},null,#{bl_content})
+
+    </insert>
+	
+	<select id="boardLessorCount" resultType="int">
+		select case when max(bl_num) is null then 0
+			else max(bl_num) end
+			from board_lessor
+	</select>
+	
+	
+	<select id="boardNoticeCount" resultType="int">
+		select case when max(bn_num) is null then 0
+			else max(bn_num) end
+			from board_notice
+	</select>
+</mapper>
+

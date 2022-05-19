@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BookMarkMapper">
+
+<delete id="delBookMark" parameterType="arraylist">
+	delete from bookmark
+	where num IN
+	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		#{item}
+	</foreach>
+</delete>
+
+<delete id="bookMarkDel" parameterType="int">
+        delete from bookmark
+        where num=#{num}
+    </delete>
+  <select id="bookMark" resultType="BookMarkDTO" parameterType="string">
+  select * from bookmark where userid=#{userid}
+  </select>
+
+<insert id="addBookMark_yp" parameterType="BookMarkDTO">
+        insert into bookmark (NUM,GCODE,
+                GPRICE_YP,ROOM,GIMAGE1,PHONE1,PHONE2,PHONE3,USERNAME,USERID,LOCATION,ADDRESS,NICKNAME,LESSORID)
+
+        values( #{num},#{gCode},#{gPrice_YP},
+                #{room},#{gImage1},#{phone1},#{phone2},#{phone3}
+                ,#{userName},#{userid},#{location},#{address},#{nickname},#{lessorid} )
+    </insert>
+    
+    <select id="bookMarkcount" resultType="int">
+    	
+    	select case when max(num) is null then 0
+                else max(num) end
+	from bookmark
+        
+    </select>
+    
+    
+    <select id="bookMarkByNum" resultType="BookMarkDTO" parameterType="int">
+    	select * from bookmark where num=#{num}
+    </select>
+    <insert id="addBookMark_mp" parameterType="BookMarkDTO">
+        insert into bookmark (NUM,GCODE,DEPOSIT,GPRICE_MP,
+        ROOM,GIMAGE1,PHONE1,PHONE2,PHONE3,USERNAME,USERID,LOCATION,ADDRESS,NICKNAME,LESSORID)
+
+        values( #{num},#{gCode},#{deposit},#{gPrice_MP},
+                #{room},#{gImage1},#{phone1},#{phone2},#{phone3}
+                ,#{userName},#{userid},#{location},#{address},#{nickname},#{lessorid} )
+    </insert>
+</mapper>

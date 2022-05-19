@@ -6,11 +6,11 @@
 create TABLE BOARD_LESSOR (
     bl_NUM  number NOT NULL ENABLE,
     bl_TITLE varchar(100),
-    bl_CONTENT varchar(2000),
     bl_LESSORID varchar(10) NOT NULL ENABLE,
     bl_NICK varchar(30) NOT NULL ENABLE,
     bl_DATE DATE,
-    bl_HIT NUMBER
+    bl_HIT NUMBER,
+    bl_CONTENT clob,
     PRIMARY KEY ("BL_NUM"));
 
 create TABLE BOARD_NOTICE (
